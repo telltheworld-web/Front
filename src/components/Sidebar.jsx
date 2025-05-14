@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; // ✅ 추가
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -56,15 +57,17 @@ const MenuItem = styled.li`
 `;
 
 const menuItems = [
-  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_book.svg" },
-  { name: "팀 소개", icon: "/images/sidebar_device-desktop-search.svg" },
-  { name: "기사 보기", icon: "/images/sidebar_world-latitude.svg" }, /* ✅ 요청한 이미지 반영 */
+  { name: "홈", icon: "/images/sidebar_book.svg", route:"/" },
+  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_book.svg", route:"/start" },
+  { name: "팀 소개", icon: "/images/sidebar_device-desktop-search.svg", route:"/team" },
+  { name: "기사 보기", icon: "/images/sidebar_world-latitude.svg", route: "/articles" }, /* ✅ 요청한 이미지 반영 */
   { name: "한국", icon: "/images/sidebar_world-cog.svg" } /* ✅ 요청한 이미지 반영 */
 ];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const navigate = useNavigate(); // ✅ 라우터 내비게이터
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -84,8 +87,8 @@ const Sidebar = () => {
       </MenuButton>
       <SidebarContainer $isOpen={isOpen} ref={sidebarRef}>
         <MenuList>
-          {menuItems.map(({ name, icon }) => (
-            <MenuItem key={name}>
+          {menuItems.map(({ name, icon, route }) => (
+            <MenuItem key={name} onClick={() => navigate(route)}>
               <img src={icon} alt={name} width="19" height="18" /> {name}
             </MenuItem>
           ))}

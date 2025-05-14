@@ -1,13 +1,19 @@
-import React from "react";
+import React from 'react';
 import styled from "styled-components";
-import Sidebar from "./components/Sidebar";
-import Home from "./components/Home";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Home from './components/Home';
+import QuizStart from './pages/QuizStart';
+import QuizPage from './components/Quiz';
+import QuizResult from './components/QuizResult';
+import ArticleList from './pages/ArticleList';
+import TeamIntro from './pages/TeamIntro';
 
 const Wrapper = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
-  max-width: 1200px;
+  max-width: 640px;
   margin: auto;
 
   @media (max-width: 768px) {
@@ -16,13 +22,33 @@ const Wrapper = styled.div`
   }
 `;
 
-const App = () => {
-  return (
+const MainContent = styled.div`
+  flex: 1;
+  padding: 60px 20px 20px 200px; // ← 좌측 padding은 Sidebar 너비만큼!
+  max-width: 640px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+  }
+`;
+
+const App = () => (
+  <Router>
     <Wrapper>
       <Sidebar />
-      <Home />
+      <MainContent>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/start" element={<QuizStart />} />
+          <Route path="/quiz/:id" element={<QuizPage />} />
+          <Route path="/result" element={<QuizResult />} />
+          <Route path="/articles" element={<ArticleList />} />
+          <Route path="/team" element={<TeamIntro />} />
+        </Routes>
+      </MainContent>
     </Wrapper>
-  );
-};
+  </Router>
+);
 
 export default App;

@@ -27,8 +27,10 @@
 
 body {
   font-family: Arial, sans-serif;
+  background-image: linear-gradient(180deg, #F9FCFC 0%, #DAF2F2 100%);
   width: 100%;
-  max-width: 640px;
+  max-width: 360px;
+  max-height: 640px;
   margin: auto;
 }
 

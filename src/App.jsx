@@ -12,27 +12,25 @@ import QuizFeedback from "./components/QuizFeedback";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
-  max-width: 640px;
-  margin: auto;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-  }
+  overflow-x: hidden;
 `;
 
 const MainContent = styled.div`
   flex: 1;
-  padding: 60px 20px 20px 200px; // ← 좌측 padding은 Sidebar 너비만큼!
+  width: 100%;
+  padding: 60px 5vw 20px 5vw;
+  box-sizing: border-box;
   max-width: 640px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding-left: 20px;
+    padding: 40px 4vw 20px 4vw;
   }
 `;
+
 
 const App = () => (
   <Router>

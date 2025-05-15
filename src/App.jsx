@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import QuizStart from './pages/QuizStart';
-import QuizPage from './components/Quiz';
+import Quiz from './components/Quiz';
 import QuizResult from './components/QuizResult';
 import ArticleList from './pages/ArticleList';
 import TeamIntro from './pages/TeamIntro';
+import QuizFeedback from "./components/QuizFeedback";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +42,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/start" element={<QuizStart />} />
-          <Route path="/quiz/:id" element={<QuizPage />} />
+          <Route path="/quiz/:id" element={<Quiz />} />
+          <Route path="/quiz/:quizId/feedback/:optionId" element={<QuizFeedback />} />
           <Route path="/result" element={<QuizResult />} />
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/team" element={<TeamIntro />} />

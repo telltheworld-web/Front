@@ -12,12 +12,6 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const BackIcon = styled.div`
-  align-self: flex-start;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
-
 const CharacterImage = styled.img`
   width: 160px;
   height: auto;
@@ -46,8 +40,8 @@ const QuizStart = () => {
 
   return (
     <Container>
-      <BackIcon onClick={() => navigate(-1)}>←</BackIcon>
-      <CharacterImage src="/images/nova.png" alt="노바 캐릭터" />
+      
+      <CharacterImage src="/images/start_nova.svg" alt="노바 캐릭터" />
       <Description>
         안녕👋 난 <span>노바(NOVA)</span>야.<br />
         내 몸은 네가 하루에 수도 없이 만나고 만들어내는 데이터들로 이루어져 있어.<br />

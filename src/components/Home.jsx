@@ -29,7 +29,7 @@ const ButtonWrapper = styled.div`
   align-items: center;
   width: 100%;
   position: absolute;
-  top: 515px;
+  top: 460px;
   left: 50%;
   transform: translateX(-50%);
 `;

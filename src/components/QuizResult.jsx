@@ -56,7 +56,7 @@ const QuizResult = () => {
       case 0:
         return (
           <>
-            <Image src="/images/result_step1.svg" alt="step1" />
+            <Image src="../images/result_step1.svg" alt="step1" />
             <Text>
               네가 쓰는 인공지능 뒤에 숨어져 있던 사람들.{"\n"}
               그들도 자신의 권리를 위해 목소리를 내기 시작했어.{"\n"}
@@ -69,7 +69,7 @@ const QuizResult = () => {
       case 1:
         return (
           <>
-            <Image src="/images/result_step2.svg" alt="step2" />
+            <Image src="../images/result_step2.svg" alt="step2" />
             <Text>
               내 안에는 수천 명의 손길이 있어.{"\n"}
               그 손길이 어떤 대우를 받았는지, 이제 너는 알게 됐어.{"\n"}
@@ -90,7 +90,7 @@ const QuizResult = () => {
               <strong>#데이터윤리퀴즈 #세상에알려조</strong> {"\n"}
               태그 후 업로드하면 이벤트 참여 완료!
             </Text>
-            <Image src="/images/result_step3.svg" alt="step3" />
+            <Image src="../images/result_step3.svg" alt="step3" />
             <Button onClick={() => alert("인증서 다운로드 준비 중입니다.")}>인증서 받기</Button>
           </>
         );

@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 
 const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
-  left: ${({ $isOpen }) => ($isOpen ? "0" : "-187px")}; /* ✅ 사이드바 너비 조정 */
-  width: 187px; /* ✅ 원하는 너비 적용 */
-  height: 640px; /* ✅ 원하는 높이 적용 */
+  left: ${({ $isOpen }) => ($isOpen ? "0" : "-187px")};
+  width: 187px;
+  height: 100vh; /* 화면 전체 높이 */
   background: var(--GrayScale-Gray000, #F9FCFC);
   border-right: 2px solid var(--GrayScale-Gray100, #EDF2F2);
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -18,9 +17,9 @@ const SidebarContainer = styled.div`
   z-index: 9999;
 
   @media (max-width: 768px) {
-    left: ${({ $isOpen }) => ($isOpen ? "0" : "-100vw")}; /* ✅ 모바일에서 전체 화면 */
-    width: 187px; /* ✅ 원하는 너비 적용 */
-    height: 640px;
+    left: ${({ $isOpen }) => ($isOpen ? "0" : "-100vw")};
+    width: 187px;
+    height: 100vh;
   }
 `;
 
@@ -33,13 +32,16 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 10000; /* 메뉴 버튼이 사이드바 위로 */
 `;
 
 const MenuList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  margin: 60px 0 0 0; /* 위쪽 공간 띄우기 */
+  padding: 0;
+  gap: 30px; /* 메뉴 항목 사이 간격 넉넉히 */
 `;
 
 const MenuItem = styled.li`
@@ -57,22 +59,21 @@ const MenuItem = styled.li`
 `;
 
 const menuItems = [
-  { name: "홈", icon: "/images/sidebar_book.svg", route:"/" },
-  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_book.svg", route:"/start" },
-  { name: "팀 소개", icon: "/images/sidebar_device-desktop-search.svg", route:"/team" },
-  { name: "기사 보기", icon: "/images/sidebar_world-latitude.svg", route: "/articles" }, /* ✅ 요청한 이미지 반영 */
-  { name: "한국", icon: "/images/sidebar_world-cog.svg" } /* ✅ 요청한 이미지 반영 */
+  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_book.svg", route: "/" },
+  { name: "팀 소개", icon: "/images/sidebar_device-desktop-search.svg", route: "/team" },
+  { name: "기사 보기", icon: "/images/sidebar_world-latitude.svg", route: "/articles" },
+  { name: "한국", icon: "/images/sidebar_world-cog.svg" },
 ];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
-  const navigate = useNavigate(); // ✅ 라우터 내비게이터
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setIsOpen(false); // ✅ 바깥 영역 클릭 시 닫힘 적용
+        setIsOpen(false);
       }
     };
 
@@ -83,13 +84,14 @@ const Sidebar = () => {
   return (
     <>
       <MenuButton onClick={() => setIsOpen(!isOpen)}>
-        <img src="./images/sidebar_menu-2.svg" alt="메뉴 열기" width="36" height="36" /> {/* ✅ 경로 수정 */}
+        <img src="../public/images/sidebar_menu-2.svg" width="36" height="36" />
       </MenuButton>
       <SidebarContainer $isOpen={isOpen} ref={sidebarRef}>
         <MenuList>
           {menuItems.map(({ name, icon, route }) => (
-            <MenuItem key={name} onClick={() => navigate(route)}>
-              <img src={icon} alt={name} width="19" height="18" /> {name}
+            <MenuItem key={name} onClick={() => route && navigate(route)}>
+              <img src={icon} alt={name} width="19" height="18" />
+              {name}
             </MenuItem>
           ))}
         </MenuList>

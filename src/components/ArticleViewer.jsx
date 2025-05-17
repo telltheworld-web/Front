@@ -1,52 +1,91 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "styled-components";
+import articles from "../data/articles";
 
-// 예시 기사 데이터
-const articles = [
-  {
-    id: 1,
-    category: "노동",
-    title: "플랫폼 노동자도 데이터 라벨링을 하나?",
-    summary: "플랫폼 노동자들이 AI를 위해 데이터를 정제하는 작업에 참여하고 있다.",
-  },
-  {
-    id: 2,
-    category: "아동",
-    title: "어린이들도 데이터 라벨링 노동을 하고 있을까?",
-    summary: "개도국에서는 아동이 데이터 분류 작업에 동원되기도 한다.",
-  },
-];
 
 const ArticleViewer = () => {
   const [selectedCategory, setSelectedCategory] = useState("전체");
+  const navigate = useNavigate();
 
-  const filteredArticles = selectedCategory === "전체"
-    ? articles
-    : articles.filter(article => article.category === selectedCategory);
+  const filteredArticles =
+    selectedCategory === "전체"
+      ? articles
+      : articles.filter((article) => article.category === selectedCategory);
 
-    const Container = styled.div`
+  return (
+    <Container>
+      <Title>
+        데이터 라벨링 관련 기사 <br />
+        모아보기 📰
+      </Title>
+      <Subtitle>
+        제3국의 데이터 라벨링 노동자와<br />
+        데이터 라벨링에 대해 알아볼 수 있어요.
+      </Subtitle>
+
+      <CategoryBox>
+        {["전체", "노동", "아동"].map((cat) => (
+          <CategoryBtn
+            key={cat}
+            active={selectedCategory === cat}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat}
+          </CategoryBtn>
+        ))}
+      </CategoryBox>
+
+      <ArticleList>
+        {filteredArticles.map(({ id, title, category,image }) => (
+          <ArticleCard key={id} onClick={() => navigate(`/articles/${id}`)}>
+            <Thumbnail src={image}/>
+            <TextContent>
+              <span>{category}</span>
+              <h3>{title}</h3>
+            </TextContent>
+          </ArticleCard>
+        ))}
+      </ArticleList>
+    </Container>
+  );
+};
+
+export default ArticleViewer;
+
+// ---------------- 스타일 컴포넌트 ----------------
+
+const Container = styled.div`
   max-width: 375px;
   margin: auto;
   padding: 24px;
-  background: #F9FCFC;
 `;
 
 const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
+  margin-top: 35px;
+  color: var(--GrayScale-Gray900, #191a1a);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
   margin-bottom: 8px;
 `;
 
 const Subtitle = styled.p`
-  font-size: 14px;
-  color: #666;
+  color: var(--GrayScale-Gray500, #7d8080);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
   margin-bottom: 20px;
 `;
 
 const CategoryBox = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 23px;
 `;
 
 const CategoryBtn = styled.button`
@@ -61,56 +100,54 @@ const CategoryBtn = styled.button`
 const ArticleList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 `;
 
 const ArticleCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 16px;
-  border: 1px solid #ddd;
+  height: 93px;
+  gap: 10px;
   border-radius: 12px;
-  background-color: #fff;
+  background: #f9fcfc;
+  box-shadow: 0px 0px 13.1px 0px rgba(71, 178, 178, 0.13);
+  cursor: pointer;
+`;
 
-  h3 {
-    margin: 0 0 6px 0;
-    font-size: 16px;
+const Thumbnail = styled.div`
+  width: 80px;
+  height: 61px;
+  background: ${({ src }) => `url(${src})`} lightgray 50% / cover no-repeat;
+  border-radius: 6px;
+  flex-shrink: 0;
+`;
+
+
+const TextContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  span {
+    color: #7d8080;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
   }
 
-  p {
+  h3 {
     margin: 0;
+    color: #252626;
+    font-family: Pretendard;
     font-size: 14px;
-    color: #555;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
   }
 `;
 
-  return (
-    <Container>
-      <Title>데이터 라벨링 관련 기사 모아보기</Title>
-      <Subtitle>지금까지 어떤 사람들이 라벨링을 했을까요? 관련 기사들을 읽어보세요.</Subtitle>
-      
-      <CategoryBox>
-        {["전체", "노동", "아동"].map((cat) => (
-          <CategoryBtn
-            key={cat}
-            active={selectedCategory === cat}
-            onClick={() => setSelectedCategory(cat)}
-          >
-            {cat}
-          </CategoryBtn>
-        ))}
-      </CategoryBox>
-
-      
-
-      <ArticleList>
-        {filteredArticles.map(({ id, title, summary }) => (
-          <ArticleCard key={id}>
-            <h3>{title}</h3>
-            <p>{summary}</p>
-          </ArticleCard>
-        ))}
-      </ArticleList>
-    </Container>
-  );
-};
-
-export default ArticleViewer;

@@ -1,6 +1,7 @@
+import ArticleDetail from './pages/ArticleDetail';
 import React from 'react';
 import styled from "styled-components";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import QuizStart from './pages/QuizStart';
@@ -31,11 +32,13 @@ const MainContent = styled.div`
   }
 `;
 
+const AppRoutes = () => {
+  const location = useLocation();
+  const hideSidebar = location.pathname.startsWith("/articles/");
 
-const App = () => (
-  <Router>
+  return (
     <Wrapper>
-      <Sidebar />
+      {!hideSidebar && <Sidebar />}
       <MainContent>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -45,9 +48,16 @@ const App = () => (
           <Route path="/result" element={<QuizResult />} />
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/team" element={<TeamIntro />} />
+          <Route path="/articles/:id" element={<ArticleDetail />} />
         </Routes>
       </MainContent>
     </Wrapper>
+  );
+};
+
+const App = () => (
+  <Router>
+    <AppRoutes />
   </Router>
 );
 

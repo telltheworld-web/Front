@@ -64,6 +64,9 @@ const App = () => (
 
 export default App;
 */
+
+<Route path="/quiz/:quizId/feedback/:optionId" element={<QuizFeedback />} />
+
 import ArticleDetail from './pages/ArticleDetail';
 import Certificate from './pages/Certificate'; // ✅ 인증서 페이지 import
 import React from 'react';

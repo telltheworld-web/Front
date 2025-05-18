@@ -57,6 +57,17 @@ const SubText = styled.p`
   text-align: center;
   margin-bottom: 24px;
 `;
+const LinkButton = styled.a`
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #3182ce;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+`;
 
 const TeamIntro = () => {
   return (
@@ -85,9 +96,21 @@ const TeamIntro = () => {
         그것이 우리의 시작입니다.
       </DescriptionBox>
       <SubText>송은선 박지원 장유정 정세영 정현주 윤채림</SubText>
-      <Button as="a" href="https://www.instagram.com/telltheworld.ai?igsh=Z3J6YzNvYzh6bjU4" target="_blank" rel="noopener noreferrer">
+      {/*  <Button as="a" href="https://www.instagram.com/telltheworld.ai?igsh=Z3J6YzNvYzh6bjU4" target="_blank" rel="noopener noreferrer">
         인스타그램 바로가기
-      </Button>
+      </Button> */ 
+      <a
+  href="https://www.instagram.com/telltheworld.ai?igsh=bWY0aGtqamIzc2tw"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="w-80 py-10 bg-teal-400 rounded-xl shadow-[0px_0px_13.1px_0px_rgba(71,178,178,0.13)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
+>
+  <div class="justify-start text-gray-50 text-lg font-bold font-['Pretendard'] leading-tight">
+    인스타그램 바로가기
+  </div>
+</a>
+}
+      
     </Container>
   );
 };

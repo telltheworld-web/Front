@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import articles from "../data/articles";
 
-
 const BlockContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -15,12 +14,14 @@ const BlockContainer = styled.div`
 
 const BackButton = styled.button`
   position: absolute;
-  top: 6px;
+  top: 20px;
   left: 20px;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   background: none;
   border: none;
+  cursor: pointer;
+  z-index: 10000;
   padding: 0;
   cursor: pointer;
 
@@ -29,7 +30,6 @@ const BackButton = styled.button`
   justify-content: center;
   z-index: 10;
 `;
-
 
 const ChevronLeftIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -46,44 +46,38 @@ const ChevronLeftIcon = () => (
 const CategoryTag = styled.p`
   color: #7D8080;
   font-family: 'Pretendard', sans-serif;
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.5;
   margin-bottom: 8px;
+  white-space: pre; /* 줄바꿈 고정 */
 `;
 
 const Title = styled.h2`
   color: #191A1A;
   font-family: 'Pretendard', sans-serif;
-  font-size: 24px;
+  font-size: clamp(20px, 5vw, 24px);
   font-weight: 600;
-  line-height: 32px;
+  line-height: 1.3;
   margin-bottom: 12px;
+  white-space: pre; /* 줄바꿈 고정 */
 `;
 
 const Image = styled.img`
-  display: flex;
-  width: 240px;
-  height: 200px;
-  justify-content: center;
-  align-items: center;
-  background: url(${props => props.src}) lightgray 50% / cover no-repeat;
+  display: block;
+  width: 80%;
+  max-width: 240px;
+  height: auto;
+  aspect-ratio: 6 / 5;
   border-radius: 12px;
   margin: 32px auto;
-`;
-
-const Content = styled.p`
-  align-self: stretch;
-  color: #252626;
-  font-family: 'Pretendard', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
+  object-fit: cover;
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  width: 312px;
+  width: 90%;
+  max-width: 312px;
   padding: 12px;
   flex-direction: column;
   justify-content: center;
@@ -95,9 +89,20 @@ const ContentBox = styled.div`
   margin: 0 auto 24px;
 `;
 
+const Content = styled.p`
+  align-self: stretch;
+  color: #252626;
+  font-family: 'Pretendard', sans-serif;
+  font-size: clamp(14px, 4vw, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: pre-line; /* 줄바꿈 유지 */
+`;
+
 const Button = styled.button`
   display: flex;
-  width: 312px;
+  width: 90%;
+  max-width: 312px;
   padding: 20px 0;
   justify-content: center;
   align-items: center;
@@ -108,7 +113,7 @@ const Button = styled.button`
   box-shadow: 0px 0px 13.1px 0px rgba(71, 178, 178, 0.13);
   color: #F9FCFC;
   font-family: 'Pretendard', sans-serif;
-  font-size: 18px;
+  font-size: clamp(16px, 4vw, 18px);
   font-weight: 700;
   line-height: 21px;
   cursor: pointer;
@@ -130,14 +135,22 @@ const ArticleDetail = () => {
     );
   }
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/articles");
+    }
+  };
+
   return (
     <BlockContainer>
-      <BackButton onClick={() => navigate("/articles")}>
+      <BackButton onClick={handleBack}>
         <ChevronLeftIcon />
       </BackButton>
       <CategoryTag>{article.category}</CategoryTag>
       <Title>{article.title}</Title>
-      <Image src={article.image}/>
+      <Image src={article.image} alt={article.title} />
       <ContentBox>
         <Content>{article.content}</Content>
       </ContentBox>
@@ -147,5 +160,3 @@ const ArticleDetail = () => {
 };
 
 export default ArticleDetail;
-
-

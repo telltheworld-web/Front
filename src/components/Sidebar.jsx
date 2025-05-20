@@ -32,8 +32,12 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 10000; /* 메뉴 버튼이 사이드바 위로 */
+  z-index: 10000;
+  display: ${({ $isOpen }) => ($isOpen ? "none" : "flex")};
+  align-items: center;
+  justify-content: center;
 `;
+
 
 const MenuList = styled.ul`
   list-style: none;
@@ -59,10 +63,9 @@ const MenuItem = styled.li`
 `;
 
 const menuItems = [
-  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_book.svg", route: "/" },
-  { name: "팀 소개", icon: "/images/sidebar_device-desktop-search.svg", route: "/team" },
-  { name: "기사 보기", icon: "/images/sidebar_world-latitude.svg", route: "/articles" },
-  { name: "한국", icon: "/images/sidebar_world-cog.svg" },
+  { name: "데이터 윤리 퀴즈", icon: "/images/sidebar_device-desktop-search.svg", route: "/" },
+  { name: "팀 소개", icon: "/images/sidebar_world-latitude.svg", route: "/team" },
+  { name: "기사 보기", icon: "/images/sidebar_book.svg", route: "/articles" },
 ];
 
 const Sidebar = () => {
@@ -83,8 +86,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <MenuButton onClick={() => setIsOpen(!isOpen)}>
-        <img src="../public/images/sidebar_menu-2.svg" width="36" height="36" />
+      <MenuButton onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
+          <img src="/images/sidebar_menu-2.svg" width="36" height="36" />
       </MenuButton>
       <SidebarContainer $isOpen={isOpen} ref={sidebarRef}>
         <MenuList>

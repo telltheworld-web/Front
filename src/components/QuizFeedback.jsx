@@ -5,116 +5,167 @@ import styled from "styled-components";
 import Button from "./Button";
 
 const Container = styled.div`
-  max-width: 375px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   background: linear-gradient(180deg, #f9fcfc 0%, #daf2f2 100%);
-  padding: 32px 16px;
-  box-sizing: border-box;
-  
+  padding: 24px 0;
+`;
+
+const InnerWrapper = styled.div`
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 48px);
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 24px 16px 0 16px;
+`;
+
+const Title = styled.h2`
+  color: #252626;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  margin-bottom: 16px;
 `;
 
 const Image = styled.img`
   width: 160px;
   height: auto;
-  margin: 0 auto 24px;
-  display: block;
-  text-align: center;
-`;
-
-const Title = styled.h2`
-  font-size: 20px;
-  font-weight: 600;
-  color: #191a1a;
-  margin-bottom: 12px;
-  text-align: center;
+  margin-bottom: 16px;
 `;
 
 const Subtitle = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  color: #191a1a;
-  margin-bottom: 12px;
-  align-item:left
-`;
-
-const DescriptionBox = styled.div`
-  background: #ffffff;
-  border: 1px solid #c8cccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const Description = styled.p`
-  font-size: 13px;
   color: #252626;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
-  
-`;
-
-const ArticleLink = styled.div`
-  color: #1cb0b0;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: underline;
-  margin: 16px 0 32px;
-  cursor: pointer;
   text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  margin-bottom: 16px;
 `;
 
 const TableContainer = styled.div`
-  background-color: #ffffff;
-  border: 2px solid #c8cccc;
-  border-radius: 8px;
-  margin: 24px 0;
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #252626;
+  display: flex;
+  flex-direction: column;
+  width: 312px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  border-radius: 12px;
+  background: #f9fcfc;
+  margin-bottom: 32px;
 `;
 
 const TableHeader = styled.div`
   display: flex;
-  font-weight: 600;
-  border-bottom: 1px solid #c8cccc;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  gap: 8px;
+  padding: 16px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid #edf2f2;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+  color: #252626;
   text-align: center;
-  color: #47B2B2
+`;
+
+const TableHeaderCol = styled.div`
+  flex: 1;
+  color: #47b2b2;
+  font-weight: 700;
 `;
 
 const TableRow = styled.div`
   display: flex;
-  justify-content: space-between;
+  padding: 16px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid #edf2f2;
+  font-family: Pretendard;
+  font-size: 14px;
+  color: #252626;
   text-align: center;
-  gap: 8px;
-  margin-bottom: 6px;
-  padding: 8px 0; // ← 줄간격 조정
-  border-bottom: 1px solid #f0f0f0;
 `;
 
 const Col = styled.div`
   flex: 1;
 `;
 
+const DescriptionBox = styled.div`
+  border-radius: 12px;
+  background: #f9fcfc;
+  box-shadow: 0px 0px 13.1px rgba(71, 178, 178, 0.13);
+  display: flex;
+  width: 312px;
+  padding: 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+`;
+
+const Description = styled.p`
+  font-size: 15px;
+  color: #252626;
+  font-family: Pretendard;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: pre-line;
+  text-align: left;
+  width: 100%;
+`;
+
+const ArticleLink = styled.div`
+  color: #47b2b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0 16px 32px 16px;
+`;
+
+const StyledButton = styled(Button)`
+  width: 100%;
+  max-width: 312px;
+`;
+
 const QuizFeedback = () => {
   const { quizId, optionId } = useParams();
-  const quiz = quizData.find(q => q.id === parseInt(quizId));
+  const quiz = quizData.find((q) => q.id === parseInt(quizId));
   const navigate = useNavigate();
 
-  if (!quiz || !quiz.feedback[optionId]) return <div>페이지를 찾을 수 없습니다.</div>;
+  if (!quiz || !quiz.feedback[optionId])
+    return <div>페이지를 찾을 수 없습니다.</div>;
 
   const { title, subtitle, description, image, link } = quiz.feedback[optionId];
+  const hasTable = parseInt(quizId) === 4;
 
   const goToNext = () => {
     const nextQuizId = quiz.id + 1;
-    const hasNext = quizData.some(q => q.id === nextQuizId);
+    const hasNext = quizData.some((q) => q.id === nextQuizId);
     if (hasNext) {
       navigate(`/quiz/${nextQuizId}`);
     } else {
@@ -124,7 +175,11 @@ const QuizFeedback = () => {
 
   const goToArticle = () => {
     if (link && typeof link === "string" && link.trim() !== "") {
-      window.open(link, "_blank");
+      if (link.startsWith("/")) {
+        navigate(link);
+      } else {
+        window.open(link, "_blank");
+      }
     } else {
       alert("유효한 링크가 없습니다.");
     }
@@ -132,43 +187,49 @@ const QuizFeedback = () => {
 
   return (
     <Container>
-      <Image src={image} alt="feedback" />
-      <Title>{title}</Title>
+      <InnerWrapper>
+        <ContentWrapper>
+          <Title>{title}</Title>
+          <Image src={image} alt="feedback" />
+          <Subtitle>{subtitle}</Subtitle>
 
-      <Subtitle>{subtitle}</Subtitle>
-      
-      {/* 퀴즈 4번일 때만 표 표시 */}
-      {parseInt(quizId) === 4 && (
-        <TableContainer>
-          <TableHeader>
-            <Col>선진국 라벨러</Col>
-            <Col>제 3국 라벨러</Col>
-          </TableHeader>
-          <TableRow>
-            <Col>정규직 또는 프리랜서</Col>
-            <Col>아웃소싱(하청 계약)</Col>
-          </TableRow>
-          <TableRow>
-            <Col>전문 교육 제공</Col>
-            <Col>최소한의 교육 제공</Col>
-          </TableRow>
-          <TableRow>
-            <Col>시간당 15~25달러</Col>
-            <Col>시간당 1~2달러</Col>
-          </TableRow>
-          <TableRow>
-            <Col>근로법 적용</Col>
-            <Col>근로법 적용 대상 아님</Col>
-          </TableRow>
-        </TableContainer>
-      )}
+          {hasTable && (
+            <TableContainer>
+              <TableHeader>
+                <TableHeaderCol>선진국 라벨러</TableHeaderCol>
+                <TableHeaderCol>제 3국 라벨러</TableHeaderCol>
+              </TableHeader>
+              <TableRow>
+                <Col>정규직 또는 프리랜서</Col>
+                <Col>아웃소싱(하청 계약)</Col>
+              </TableRow>
+              <TableRow>
+                <Col>전문 교육 제공</Col>
+                <Col>최소한의 교육 제공</Col>
+              </TableRow>
+              <TableRow>
+                <Col>시간당 15~25달러</Col>
+                <Col>시간당 1~2달러</Col>
+              </TableRow>
+              <TableRow>
+                <Col>근로법 적용</Col>
+                <Col>근로법 적용 대상 아님</Col>
+              </TableRow>
+            </TableContainer>
+          )}
 
-      <DescriptionBox>
-        <Description>{description}</Description>
-      </DescriptionBox>
+          <DescriptionBox>
+            <Description>{description}</Description>
+            <ArticleLink onClick={goToArticle}>
+              {"> 관련 기사 보러가기"}
+            </ArticleLink>
+          </DescriptionBox>
+        </ContentWrapper>
 
-      <ArticleLink onClick={goToArticle}>{"> 관련 기사 보러가기"}</ArticleLink>
-      <Button onClick={goToNext}>다음</Button>
+        <ButtonWrapper>
+          <StyledButton onClick={goToNext}>다음</StyledButton>
+        </ButtonWrapper>
+      </InnerWrapper>
     </Container>
   );
 };

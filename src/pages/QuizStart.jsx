@@ -17,7 +17,7 @@ const CharacterImage = styled.img`
   max-width: 249.6px;
   aspect-ratio: 249.6 / 312;
   flex-shrink: 0;
-  margin: 20px 0;
+  margin: 7px 0;
   height: auto;
 `;
 

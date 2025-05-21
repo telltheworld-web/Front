@@ -84,7 +84,7 @@ const SubText = styled.p`
   font-style: normal;
   text-align: center;
   margin-top: clamp(16px, 4vw, 24px);    /* 위쪽 간격 추가 */
-  margin-bottom: clamp(16px, 4vw, 24px); /* 기존 아래쪽 간격 유지 */
+  margin-bottom: clamp(28px, 4vw, 32px); /* 기존 아래쪽 간격 유지 */
 `;
 
 

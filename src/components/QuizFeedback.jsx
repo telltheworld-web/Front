@@ -28,6 +28,12 @@ const ContentWrapper = styled.div`
   align-items: center;
   overflow-y: auto;
   padding: 24px 16px 0 16px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
 `;
 
 const Title = styled.h2`
@@ -48,62 +54,52 @@ const Image = styled.img`
 
 const Subtitle = styled.p`
   color: #252626;
-  text-align: center;
+  text-align: left; 
   font-family: Pretendard;
   font-size: 18px;
   font-weight: 700;
   line-height: 21px;
-  margin-bottom: 16px;
+  margin-bottom: 22px;
 `;
 
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const TableContainer = styled.table`
   width: 312px;
-  padding: 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 0;
-  border-radius: 12px;
-  background: #f9fcfc;
+  border-collapse: collapse;
+  border: 2px solid var(--GrayScale-Gray100, #EDF2F2);
+  border-radius: 12px; /* 둥근 모서리 */
+  background: var(--GrayScale-Gray000, #F9FCFC); /* 배경색 적용 */
+  box-shadow: 0px 0px 13.1px 0px rgba(71, 178, 178, 0.13); /* 그림자 효과 */
   margin-bottom: 32px;
 `;
 
-const TableHeader = styled.div`
-  display: flex;
-  padding: 16px 0;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 2px solid #edf2f2;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-weight: 500;
-  color: #252626;
-  text-align: center;
+const TableHeader = styled.thead`
+
 `;
 
-const TableHeaderCol = styled.div`
-  flex: 1;
-  color: #47b2b2;
+const TableRow = styled.tr`
+  border-bottom: 2px solid var(--GrayScale-Gray100, #EDF2F2);
+`;
+
+const TableHeaderCol = styled.th`
+  padding: 16px;
+  color: var(--Primary-Primary001, #47B2B2);
+  font-family: Pretendard;
+  font-size: 14px;
   font-weight: 700;
-`;
-
-const TableRow = styled.div`
-  display: flex;
-  padding: 16px 0;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 2px solid #edf2f2;
-  font-family: Pretendard;
-  font-size: 14px;
-  color: #252626;
+  line-height: 17px;
   text-align: center;
+  border: 2px solid var(--GrayScale-Gray100, #EDF2F2);
 `;
 
-const Col = styled.div`
-  flex: 1;
+const TableData = styled.td`
+  padding: 16px;
+  color: var(--GrayScale-Gray800, #252626);
+  font-family: Pretendard;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: center;
+  border: 2px solid var(--GrayScale-Gray100, #EDF2F2);
 `;
 
 const DescriptionBox = styled.div`
@@ -157,8 +153,7 @@ const QuizFeedback = () => {
   const quiz = quizData.find((q) => q.id === parseInt(quizId));
   const navigate = useNavigate();
 
-  if (!quiz || !quiz.feedback[optionId])
-    return <div>페이지를 찾을 수 없습니다.</div>;
+  if (!quiz || !quiz.feedback[optionId]) return <div>페이지를 찾을 수 없습니다.</div>;
 
   const { title, subtitle, description, image, link } = quiz.feedback[optionId];
   const hasTable = parseInt(quizId) === 4;
@@ -166,20 +161,12 @@ const QuizFeedback = () => {
   const goToNext = () => {
     const nextQuizId = quiz.id + 1;
     const hasNext = quizData.some((q) => q.id === nextQuizId);
-    if (hasNext) {
-      navigate(`/quiz/${nextQuizId}`);
-    } else {
-      navigate("/result");
-    }
+    navigate(hasNext ? `/quiz/${nextQuizId}` : "/result");
   };
 
   const goToArticle = () => {
     if (link && typeof link === "string" && link.trim() !== "") {
-      if (link.startsWith("/")) {
-        navigate(link);
-      } else {
-        window.open(link, "_blank");
-      }
+      link.startsWith("/") ? navigate(link) : window.open(link, "_blank");
     } else {
       alert("유효한 링크가 없습니다.");
     }
@@ -196,33 +183,35 @@ const QuizFeedback = () => {
           {hasTable && (
             <TableContainer>
               <TableHeader>
-                <TableHeaderCol>선진국 라벨러</TableHeaderCol>
-                <TableHeaderCol>제 3국 라벨러</TableHeaderCol>
+                <TableRow>
+                  <TableHeaderCol>선진국 라벨러</TableHeaderCol>
+                  <TableHeaderCol>제 3국 라벨러</TableHeaderCol>
+                </TableRow>
               </TableHeader>
-              <TableRow>
-                <Col>정규직 또는 프리랜서</Col>
-                <Col>아웃소싱(하청 계약)</Col>
-              </TableRow>
-              <TableRow>
-                <Col>전문 교육 제공</Col>
-                <Col>최소한의 교육 제공</Col>
-              </TableRow>
-              <TableRow>
-                <Col>시간당 15~25달러</Col>
-                <Col>시간당 1~2달러</Col>
-              </TableRow>
-              <TableRow>
-                <Col>근로법 적용</Col>
-                <Col>근로법 적용 대상 아님</Col>
-              </TableRow>
+              <tbody>
+                <TableRow>
+                  <TableData>정규직 또는 프리랜서</TableData>
+                  <TableData>아웃소싱(하청 계약)</TableData>
+                </TableRow>
+                <TableRow>
+                  <TableData>전문 교육 제공</TableData>
+                  <TableData>최소한의 교육 제공</TableData>
+                </TableRow>
+                <TableRow>
+                  <TableData>시간당 15~25달러</TableData>
+                  <TableData>시간당 1~2달러</TableData>
+                </TableRow>
+                <TableRow>
+                  <TableData>근로법 적용</TableData>
+                  <TableData>근로법 적용 대상 아님</TableData>
+                </TableRow>
+              </tbody>
             </TableContainer>
           )}
 
           <DescriptionBox>
             <Description>{description}</Description>
-            <ArticleLink onClick={goToArticle}>
-              {"> 관련 기사 보러가기"}
-            </ArticleLink>
+            <ArticleLink onClick={goToArticle}>{"> 관련 기사 보러가기"}</ArticleLink>
           </DescriptionBox>
         </ContentWrapper>
 

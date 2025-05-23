@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import html2canvas from 'html2canvas';
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -15,8 +14,6 @@ const Container = styled.div`
   width: clamp(20rem, 90vw, 24rem);
   height: clamp(540px, 90vh, 650px);
   position: relative;
-
-  overflow: hidden;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -147,7 +144,6 @@ const Certificate = () => {
   const inputRef = useRef(null);
   const [name, setName] = useState('');
   const [savedName, setSavedName] = useState('');
-  const certificateRef = useRef(null);
 
   const handleFocus = () => {
     if (inputRef.current) {
@@ -158,17 +154,6 @@ const Certificate = () => {
   const handleSaveName = () => {
     if (name.trim()) {
       setSavedName(name.trim());
-      setTimeout(downloadCertificate, 100);
-    }
-  };
-
-  const downloadCertificate = async () => {
-    if (certificateRef.current) {
-      const canvas = await html2canvas(certificateRef.current);
-      const link = document.createElement('a');
-      link.download = 'certificate.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
     }
   };
 
@@ -181,7 +166,7 @@ const Certificate = () => {
   return (
     <>
       <GlobalStyle />
-      <Container ref={certificateRef}>
+      <Container>
         <Title>퀴즈를 모두 해결했어요💡</Title>
 
         <Description>
@@ -211,9 +196,7 @@ const Certificate = () => {
                 onFocus={handleFocus}
                 onKeyDown={handleKeyDown}
               />
-              <NameIcon onClick={handleSaveName}>
-                <img src="/images/pencil.svg" alt="이름 저장" />
-              </NameIcon>
+              
             </>
           )}
         </NameTag>

@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 90vw;
   margin: 0 auto;
   padding: clamp(16px, 5vw, 24px) clamp(16px, 5vw, 24px) clamp(48px, 10vw, 80px);
-  background: linear-gradient(180deg, #F9FCFC 0%, #DAF2F2 100%);
+
   min-height: 100vh;
   box-sizing: border-box;
 

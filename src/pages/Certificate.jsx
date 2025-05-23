@@ -15,7 +15,7 @@ const Container = styled.div`
   width: clamp(20rem, 90vw, 24rem);
   height: clamp(540px, 90vh, 650px);
   position: relative;
-  background: linear-gradient(180deg, #F9FCFC 0%, #DAF2F2 100%);
+
   overflow: hidden;
   margin: 0 auto;
   display: flex;

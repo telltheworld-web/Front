@@ -50,6 +50,17 @@ const Title = styled.h2`
   color: #191A1A;
 `;
 
+const ArticleLink = styled.div`
+  color: #47b2b2;
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 16px;
+`;
+
 const StyledButton = styled.button`
   width: clamp(260px, 80vw, 312px);
   padding: 20px 0;
@@ -88,6 +99,11 @@ const QuizResult = () => {
 
   const handleNext = () => setStep(step + 1);
 
+  // goToArticle 함수 정의
+  const goToArticle = () => {
+    navigate('/articles/5'); // 내부 경로로 이동
+  };
+
   const renderStep = () => {
     switch (step) {
       case 0:
@@ -102,6 +118,7 @@ const QuizResult = () => {
               연대해 실태를 폭로하고, AI 기업에 법적 책임{"\n"}
               을 묻는 운동을 시작했어.
             </Text>
+            <ArticleLink onClick={goToArticle}>{"> 관련 기사 보러가기"}</ArticleLink>
             <StyledButton onClick={handleNext}>다음</StyledButton>
           </>
         );

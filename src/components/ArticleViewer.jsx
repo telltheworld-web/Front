@@ -111,7 +111,6 @@ const ArticleCard = styled.div`
   height: 93px;
   gap: 10px;
   border-radius: 12px;
-  background: #f9fcfc;
   box-shadow: 0px 0px 13.1px 0px rgba(71, 178, 178, 0.13);
   cursor: pointer;
 `;

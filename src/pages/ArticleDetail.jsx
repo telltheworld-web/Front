@@ -10,7 +10,6 @@ const BlockContainer = styled.div`
   flex-direction: column;
   padding: 2vh 4vw;
   box-sizing: border-box;
-  background: linear-gradient(180deg, #F9FCFC 0%, #DAF2F2 100%);
 `;
 
 const BackButton = styled.button`

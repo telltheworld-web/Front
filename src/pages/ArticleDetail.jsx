@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import articles from "../data/articles";
+import Button from "../components/Button";
 
 const BlockContainer = styled.div`
   min-height: 100vh;
@@ -99,26 +100,7 @@ const Content = styled.p`
   white-space: pre-line; /* 줄바꿈 유지 */
 `;
 
-const Button = styled.button`
-  display: flex;
-  width: 90%;
-  max-width: 312px;
-  padding: 20px 0;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  border-radius: 12px;
-  background: #47B2B2;
-  box-shadow: 0px 0px 13.1px 0px rgba(71, 178, 178, 0.13);
-  color: #F9FCFC;
-  font-family: 'Pretendard', sans-serif;
-  font-size: clamp(16px, 4vw, 18px);
-  font-weight: 700;
-  line-height: 21px;
-  cursor: pointer;
-  margin: 24px auto 0;
-`;
+
 
 const ArticleDetail = () => {
   const { id } = useParams();

@@ -76,18 +76,15 @@ const BlockHome = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Sidebar />
-      <BlockContainer>
-        <BlockContent>
-          <BlockTitle>{"노바와 함께하는\n데이터 윤리 퀴즈 💬"}</BlockTitle>
-          <BlockSubtitle>{"데이터 라벨링에 대해서 아시나요?\n퀴즈를 풀어봐요!"}</BlockSubtitle>
-          <BlockButtonWrapper>
-            <StyledButton onClick={() => navigate("/start")}>응 좋아!</StyledButton>
-          </BlockButtonWrapper>
-        </BlockContent>
-      </BlockContainer>
-    </>
+    <BlockContainer>
+      <BlockContent>
+        <BlockTitle>{"노바와 함께하는\n데이터 윤리 퀴즈 💬"}</BlockTitle>
+        <BlockSubtitle>{"데이터 라벨링에 대해서 아시나요?\n퀴즈를 풀어봐요!"}</BlockSubtitle>
+        <BlockButtonWrapper>
+          <StyledButton onClick={() => navigate("/start")}>응 좋아!</StyledButton>
+        </BlockButtonWrapper>
+      </BlockContent>
+    </BlockContainer>
   );
 };
 

@@ -25,7 +25,7 @@ const ArticleViewer = () => {
       </Subtitle>
 
       <CategoryBox>
-        {["전체", "노동", "아동"].map((cat) => (
+        {["전체", "인권", "환경","가시화"].map((cat) => (
           <CategoryBtn
             key={cat}
             active={selectedCategory === cat}

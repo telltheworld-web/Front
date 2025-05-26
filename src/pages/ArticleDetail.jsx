@@ -51,7 +51,7 @@ const CategoryTag = styled.p`
   font-weight: 500;
   line-height: 1.5;
   margin-bottom: 8px;
-  white-space: pre; /* 줄바꿈 고정 */
+  white-space: pre-line /* 줄바꿈 고정 */
 `;
 
 const Title = styled.h2`

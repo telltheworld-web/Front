@@ -1,3 +1,9 @@
+# 서울여자대학교 바롬종합설계 프로젝트
+2025년도 1학기 23분반
+데이터라벨링 노동을 조명하고자하는
+퀴즈, 기사모아보기 웹사이트
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
